@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Reverb & Delay Calculator',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Reverb & Delay Calculator'),
     );
   }
 }
@@ -96,12 +97,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Tempo:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
+            _IntegerExample(),
           ],
         ),
       ),
@@ -110,6 +112,109 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class _IntegerExample extends StatefulWidget {
+  @override
+  __IntegerExampleState createState() => __IntegerExampleState();
+}
+
+class __IntegerExampleState extends State<_IntegerExample> {
+  int _currentValue = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        NumberPicker(
+          value: _currentValue,
+          minValue: 1,
+          maxValue: 999,
+          onChanged: (value) => setState(() => _currentValue = value),
+        ),
+        Text('Current value: $_currentValue'),
+        DataTable(
+          // datatable widget
+          columns: [
+            DataColumn(
+              label: Text('Size'),
+            ),
+            DataColumn(
+              label: Text('Pre-Delay'),
+            ),
+            DataColumn(
+              label: Text('Decay'),
+            ),
+            DataColumn(
+              label: Text('Total'),
+            ),
+          ],
+
+          rows: [
+            // 1/4 Note
+            DataRow(cells: [
+              const DataCell(Text('1/4 Note')),
+              DataCell(Text(((60000 / _currentValue) / 64).toStringAsFixed(2))),
+              DataCell(Text(
+                  ((60000 / _currentValue) - ((60000 / _currentValue) / 64))
+                      .toStringAsFixed(2))),
+              DataCell(Text((60000 / _currentValue).toString())),
+            ]),
+            // 1/2 Note
+            DataRow(cells: [
+              const DataCell(Text('1/2 Note')),
+              DataCell(Text(
+                  (((60000 / _currentValue) * 2) / 64).toStringAsFixed(2))),
+              DataCell(Text((((60000 / _currentValue) * 2) -
+                      ((60000 / _currentValue) * 2) / 64)
+                  .toStringAsFixed(2))),
+              DataCell(Text(((60000 / _currentValue) * 2).toStringAsFixed(2))),
+            ]),
+            // 1 bar
+            DataRow(cells: [
+              const DataCell(Text('1 Bar')),
+              DataCell(Text(
+                  (((60000 / _currentValue) * 4) / 64).toStringAsFixed(2))),
+              DataCell(Text((((60000 / _currentValue) * 4) -
+                      (((60000 / _currentValue) * 4) / 64))
+                  .toStringAsFixed(2))),
+              DataCell(Text(((60000 / _currentValue) * 4).toStringAsFixed(2))),
+            ]),
+            // 2 bars
+            DataRow(cells: [
+              const DataCell(Text('2 Bars')),
+              DataCell(Text(
+                  (((60000 / _currentValue) * 8) / 64).toStringAsFixed(2))),
+              DataCell(Text((((60000 / _currentValue) * 8) -
+                      (((60000 / _currentValue) * 8) / 64))
+                  .toStringAsFixed(2))),
+              DataCell(Text(((60000 / _currentValue) * 8).toStringAsFixed(2))),
+            ]),
+            // 4 bars
+            DataRow(cells: [
+              const DataCell(Text('4 Bars')),
+              DataCell(Text(
+                  (((60000 / _currentValue) * 16) / 64).toStringAsFixed(2))),
+              DataCell(Text((((60000 / _currentValue) * 16) -
+                      (((60000 / _currentValue) * 16) / 64))
+                  .toStringAsFixed(2))),
+              DataCell(Text(((60000 / _currentValue) * 16).toStringAsFixed(2))),
+            ]),
+            // 8 bars
+            DataRow(cells: [
+              const DataCell(Text('8 Bars')),
+              DataCell(Text(
+                  (((60000 / _currentValue) * 32) / 64).toStringAsFixed(2))),
+              DataCell(Text((((60000 / _currentValue) * 32) -
+                      (((60000 / _currentValue) * 32) / 64))
+                  .toStringAsFixed(2))),
+              DataCell(Text(((60000 / _currentValue) * 32).toStringAsFixed(2))),
+            ]),
+          ],
+        )
+      ],
     );
   }
 }
