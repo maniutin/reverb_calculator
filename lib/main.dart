@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //   '$_counter',
             //   style: Theme.of(context).textTheme.headlineMedium,
             // ),
-            _IntegerExample(),
+            _TempoSelector(),
           ],
         ),
       ),
@@ -116,13 +116,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class _IntegerExample extends StatefulWidget {
+class _TempoSelector extends StatefulWidget {
   @override
-  __IntegerExampleState createState() => __IntegerExampleState();
+  __TempoSelectorState createState() => __TempoSelectorState();
 }
 
-class __IntegerExampleState extends State<_IntegerExample> {
-  int _currentValue = 3;
+class __TempoSelectorState extends State<_TempoSelector> {
+  int _currentValue = 120;
+
+  String calculateTime(String type, double multiplier) {
+    switch (type) {
+      case 'predelay':
+        return (((60000 / _currentValue) * multiplier) / 64).toStringAsFixed(2);
+      case 'decay':
+        return (((60000 / _currentValue) * multiplier) -
+                (((60000 / _currentValue) * multiplier) / 64))
+            .toStringAsFixed(2);
+      case 'total':
+        return ((60000 / _currentValue) * multiplier).toStringAsFixed(2);
+      default:
+        return ('Error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +149,7 @@ class __IntegerExampleState extends State<_IntegerExample> {
           maxValue: 999,
           onChanged: (value) => setState(() => _currentValue = value),
         ),
-        Text('Current value: $_currentValue'),
+        // Text('Current value: $_currentValue'),
         DataTable(
           // datatable widget
           columns: [
@@ -151,66 +166,62 @@ class __IntegerExampleState extends State<_IntegerExample> {
               label: Text('Total'),
             ),
           ],
-
           rows: [
+            // 1/16 Note
+            DataRow(cells: [
+              const DataCell(Text('1/16 Note')),
+              DataCell(Text(calculateTime('predelay', 0.25))),
+              DataCell(Text(calculateTime('decay', 0.25))),
+              DataCell(Text(calculateTime('total', 0.25))),
+            ]),
+            // 1/8 Note
+            DataRow(cells: [
+              DataCell(Text('1/8 Note')),
+              DataCell(Text(calculateTime('predelay', 0.5))),
+              DataCell(Text(calculateTime('decay', 0.5))),
+              DataCell(Text(calculateTime('total', 0.5))),
+            ]),
             // 1/4 Note
             DataRow(cells: [
-              const DataCell(Text('1/4 Note')),
-              DataCell(Text(((60000 / _currentValue) / 64).toStringAsFixed(2))),
-              DataCell(Text(
-                  ((60000 / _currentValue) - ((60000 / _currentValue) / 64))
-                      .toStringAsFixed(2))),
-              DataCell(Text((60000 / _currentValue).toString())),
+              DataCell(Text('1/4 Note')),
+              DataCell(Text(calculateTime('predelay', 1))),
+              DataCell(Text(calculateTime('decay', 1))),
+              DataCell(Text(calculateTime('total', 1))),
             ]),
             // 1/2 Note
             DataRow(cells: [
-              const DataCell(Text('1/2 Note')),
-              DataCell(Text(
-                  (((60000 / _currentValue) * 2) / 64).toStringAsFixed(2))),
-              DataCell(Text((((60000 / _currentValue) * 2) -
-                      ((60000 / _currentValue) * 2) / 64)
-                  .toStringAsFixed(2))),
-              DataCell(Text(((60000 / _currentValue) * 2).toStringAsFixed(2))),
+              DataCell(Text('1/2 Note')),
+              DataCell(Text(calculateTime('predelay', 2))),
+              DataCell(Text(calculateTime('decay', 2))),
+              DataCell(Text(calculateTime('total', 2))),
             ]),
             // 1 bar
             DataRow(cells: [
-              const DataCell(Text('1 Bar')),
-              DataCell(Text(
-                  (((60000 / _currentValue) * 4) / 64).toStringAsFixed(2))),
-              DataCell(Text((((60000 / _currentValue) * 4) -
-                      (((60000 / _currentValue) * 4) / 64))
-                  .toStringAsFixed(2))),
-              DataCell(Text(((60000 / _currentValue) * 4).toStringAsFixed(2))),
+              DataCell(Text('1 Bar')),
+              DataCell(Text(calculateTime('predelay', 4))),
+              DataCell(Text(calculateTime('decay', 4))),
+              DataCell(Text(calculateTime('total', 4))),
             ]),
             // 2 bars
             DataRow(cells: [
-              const DataCell(Text('2 Bars')),
-              DataCell(Text(
-                  (((60000 / _currentValue) * 8) / 64).toStringAsFixed(2))),
-              DataCell(Text((((60000 / _currentValue) * 8) -
-                      (((60000 / _currentValue) * 8) / 64))
-                  .toStringAsFixed(2))),
-              DataCell(Text(((60000 / _currentValue) * 8).toStringAsFixed(2))),
+              DataCell(Text('2 Bars')),
+              DataCell(Text(calculateTime('predelay', 8))),
+              DataCell(Text(calculateTime('decay', 8))),
+              DataCell(Text(calculateTime('total', 8))),
             ]),
             // 4 bars
             DataRow(cells: [
-              const DataCell(Text('4 Bars')),
-              DataCell(Text(
-                  (((60000 / _currentValue) * 16) / 64).toStringAsFixed(2))),
-              DataCell(Text((((60000 / _currentValue) * 16) -
-                      (((60000 / _currentValue) * 16) / 64))
-                  .toStringAsFixed(2))),
-              DataCell(Text(((60000 / _currentValue) * 16).toStringAsFixed(2))),
+              DataCell(Text('4 Bars')),
+              DataCell(Text(calculateTime('predelay', 16))),
+              DataCell(Text(calculateTime('decay', 16))),
+              DataCell(Text(calculateTime('total', 16))),
             ]),
             // 8 bars
             DataRow(cells: [
-              const DataCell(Text('8 Bars')),
-              DataCell(Text(
-                  (((60000 / _currentValue) * 32) / 64).toStringAsFixed(2))),
-              DataCell(Text((((60000 / _currentValue) * 32) -
-                      (((60000 / _currentValue) * 32) / 64))
-                  .toStringAsFixed(2))),
-              DataCell(Text(((60000 / _currentValue) * 32).toStringAsFixed(2))),
+              DataCell(Text('8 Bars')),
+              DataCell(Text(calculateTime('predelay', 32))),
+              DataCell(Text(calculateTime('decay', 32))),
+              DataCell(Text(calculateTime('total', 32))),
             ]),
           ],
         )
