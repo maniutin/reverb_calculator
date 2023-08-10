@@ -14,15 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Reverb & Delay Calculator',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Reverb & Delay Calculator'),
@@ -346,3 +337,197 @@ class __TempoSelectorState extends State<_TempoSelector> {
     );
   }
 }
+
+// class ValuesTable extends StatelessWidget{
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context); // ← Add this.
+
+//     return Column(
+//       children: <Widget>[
+//         NumberPicker(
+//           value: _currentValue,
+//           minValue: 1,
+//           maxValue: 999,
+//           onChanged: (value) => setState(() => _currentValue = value),
+//         ),
+//         // Text('Current value: $_currentValue'),
+//         SizedBox(
+//           width: MediaQuery.of(context).size.width,
+//           height: MediaQuery.of(context).size.height,
+//           child: DefaultTabController(
+//             length: 2,
+//             child: Scaffold(
+//               appBar: TabBar(
+//                 tabs: [
+//                   Text(
+//                     'Reverb',
+//                     style: TextStyle(color: theme.colorScheme.primary),
+//                   ),
+//                   Text(
+//                     'Delay',
+//                     style: TextStyle(color: theme.colorScheme.primary),
+//                   ),
+//                 ],
+//               ),
+//               body: TabBarView(
+//                 children: [
+//                   DataTable(
+//                     // datatable widget
+//                     columns: [
+//                       DataColumn(
+//                         label: Text('Size'),
+//                       ),
+//                       DataColumn(
+//                         label: Text('Pre-Delay'),
+//                       ),
+//                       DataColumn(
+//                         label: Text('Decay'),
+//                       ),
+//                       DataColumn(
+//                         label: Text('Total'),
+//                       ),
+//                     ],
+//                     rows: [
+//                       // 1/16 Note
+//                       DataRow(cells: [
+//                         const DataCell(Text('1/16 Note')),
+//                         DataCell(Text(calculateReverbTime('predelay', 0.25))),
+//                         DataCell(Text(calculateReverbTime('decay', 0.25))),
+//                         DataCell(Text(calculateReverbTime('total', 0.25))),
+//                       ]),
+//                       // 1/8 Note
+//                       DataRow(cells: [
+//                         DataCell(Text('1/8 Note')),
+//                         DataCell(Text(calculateReverbTime('predelay', 0.5))),
+//                         DataCell(Text(calculateReverbTime('decay', 0.5))),
+//                         DataCell(Text(calculateReverbTime('total', 0.5))),
+//                       ]),
+//                       // 1/4 Note
+//                       DataRow(cells: [
+//                         DataCell(Text('1/4 Note')),
+//                         DataCell(Text(calculateReverbTime('predelay', 1))),
+//                         DataCell(Text(calculateReverbTime('decay', 1))),
+//                         DataCell(Text(calculateReverbTime('total', 1))),
+//                       ]),
+//                       // 1/2 Note
+//                       DataRow(cells: [
+//                         DataCell(Text('1/2 Note')),
+//                         DataCell(Text(calculateReverbTime('predelay', 2))),
+//                         DataCell(Text(calculateReverbTime('decay', 2))),
+//                         DataCell(Text(calculateReverbTime('total', 2))),
+//                       ]),
+//                       // 1 bar
+//                       DataRow(cells: [
+//                         DataCell(Text('1 Bar')),
+//                         DataCell(Text(calculateReverbTime('predelay', 4))),
+//                         DataCell(Text(calculateReverbTime('decay', 4))),
+//                         DataCell(Text(calculateReverbTime('total', 4))),
+//                       ]),
+//                       // 2 bars
+//                       DataRow(cells: [
+//                         DataCell(Text('2 Bars')),
+//                         DataCell(Text(calculateReverbTime('predelay', 8))),
+//                         DataCell(Text(calculateReverbTime('decay', 8))),
+//                         DataCell(Text(calculateReverbTime('total', 8))),
+//                       ]),
+//                       // 4 bars
+//                       DataRow(cells: [
+//                         DataCell(Text('4 Bars')),
+//                         DataCell(Text(calculateReverbTime('predelay', 16))),
+//                         DataCell(Text(calculateReverbTime('decay', 16))),
+//                         DataCell(Text(calculateReverbTime('total', 16))),
+//                       ]),
+//                       // 8 bars
+//                       DataRow(cells: [
+//                         DataCell(Text('8 Bars')),
+//                         DataCell(Text(calculateReverbTime('predelay', 32))),
+//                         DataCell(Text(calculateReverbTime('decay', 32))),
+//                         DataCell(Text(calculateReverbTime('total', 32))),
+//                       ]),
+//                     ],
+//                   ),
+//                   DataTable(
+//                     // datatable widget
+//                     columns: [
+//                       DataColumn(
+//                         label: Text('Size'),
+//                       ),
+//                       DataColumn(
+//                         label: Text('Note'),
+//                       ),
+//                       DataColumn(
+//                         label: Text('Dotted'),
+//                       ),
+//                       DataColumn(
+//                         label: Text('Tiplet'),
+//                       ),
+//                     ],
+//                     rows: [
+//                       // 1/16 Note
+//                       DataRow(cells: [
+//                         const DataCell(Text('1/16 Note')),
+//                         DataCell(Text(calculateDelayTime('note', 0.25))),
+//                         DataCell(Text(calculateDelayTime('dotted', 0.25))),
+//                         DataCell(Text(calculateDelayTime('triplet', 0.25))),
+//                       ]),
+//                       // 1/8 Note
+//                       DataRow(cells: [
+//                         DataCell(Text('1/8 Note')),
+//                         DataCell(Text(calculateDelayTime('note', 0.5))),
+//                         DataCell(Text(calculateDelayTime('dotted', 0.5))),
+//                         DataCell(Text(calculateDelayTime('triplet', 0.5))),
+//                       ]),
+//                       // 1/4 Note
+//                       DataRow(cells: [
+//                         DataCell(Text('1/4 Note')),
+//                         DataCell(Text(calculateDelayTime('note', 1))),
+//                         DataCell(Text(calculateDelayTime('dotted', 1))),
+//                         DataCell(Text(calculateDelayTime('triplet', 1))),
+//                       ]),
+//                       // 1/2 Note
+//                       DataRow(cells: [
+//                         DataCell(Text('1/2 Note')),
+//                         DataCell(Text(calculateDelayTime('note', 2))),
+//                         DataCell(Text(calculateDelayTime('dotted', 2))),
+//                         DataCell(Text(calculateDelayTime('triplet', 2))),
+//                       ]),
+//                       // 1 bar
+//                       DataRow(cells: [
+//                         DataCell(Text('1 Bar')),
+//                         DataCell(Text(calculateDelayTime('note', 4))),
+//                         DataCell(Text(calculateDelayTime('dotted', 4))),
+//                         DataCell(Text(calculateDelayTime('triplet', 4))),
+//                       ]),
+//                       // 2 bars
+//                       DataRow(cells: [
+//                         DataCell(Text('2 Bars')),
+//                         DataCell(Text(calculateDelayTime('note', 8))),
+//                         DataCell(Text(calculateDelayTime('dotted', 8))),
+//                         DataCell(Text(calculateDelayTime('triplet', 8))),
+//                       ]),
+//                       // 4 bars
+//                       DataRow(cells: [
+//                         DataCell(Text('4 Bars')),
+//                         DataCell(Text(calculateDelayTime('note', 16))),
+//                         DataCell(Text(calculateDelayTime('dotted', 16))),
+//                         DataCell(Text(calculateDelayTime('triplet', 16))),
+//                       ]),
+//                       // 8 bars
+//                       DataRow(cells: [
+//                         DataCell(Text('8 Bars')),
+//                         DataCell(Text(calculateDelayTime('note', 32))),
+//                         DataCell(Text(calculateDelayTime('dotted', 32))),
+//                         DataCell(Text(calculateDelayTime('triplet', 32))),
+//                       ]),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
