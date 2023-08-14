@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Reverb & Delay Calculator',
           theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
-          ),
+              primarySwatch: Colors.blueGrey,
+              scaffoldBackgroundColor: Colors.grey),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
   }
@@ -46,13 +46,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      // appBar: AppBar(
+      //   title: Text(widget.title),
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[ValuesTable(), TempoSelector()],
+          children: <Widget>[
+            ValuesTable(),
+            SizedBox(height: 50),
+            TempoSelector()
+          ],
         ),
       ),
     );
@@ -69,11 +73,12 @@ class TempoSelector extends StatelessWidget {
       children: <Widget>[
         const Text(
           'Tempo:',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
         NumberPicker(
           value: currentValue,
-          minValue: 1,
-          maxValue: 999,
+          minValue: 20,
+          maxValue: 400,
           onChanged: (value) => appState.changeTempo(value),
         ),
       ],
@@ -128,11 +133,17 @@ class ValuesTable extends StatelessWidget {
                 tabs: [
                   Text(
                     'Reverb',
-                    style: TextStyle(color: theme.colorScheme.primary),
+                    style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                   Text(
                     'Delay',
-                    style: TextStyle(color: theme.colorScheme.primary),
+                    style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                 ],
               ),
