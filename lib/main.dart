@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Reverb & Delay Calculator',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.blueGrey,
           ),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[TempoSelector(), ValuesTable()],
+          children: <Widget>[ValuesTable(), TempoSelector()],
         ),
       ),
     );
@@ -120,7 +120,7 @@ class ValuesTable extends StatelessWidget {
       children: <Widget>[
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height / 2,
           child: DefaultTabController(
             length: 2,
             child: Scaffold(
@@ -138,8 +138,9 @@ class ValuesTable extends StatelessWidget {
               ),
               body: TabBarView(
                 children: [
+                  // Reverb Table
                   DataTable(
-                    // datatable widget
+                    columnSpacing: 25.0,
                     columns: [
                       DataColumn(
                         label: Text('Size'),
@@ -237,8 +238,9 @@ class ValuesTable extends StatelessWidget {
                       ]),
                     ],
                   ),
+                  // Delay Table
                   DataTable(
-                    // datatable widget
+                    columnSpacing: 30.0,
                     columns: [
                       DataColumn(
                         label: Text('Size'),
