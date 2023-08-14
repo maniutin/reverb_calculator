@@ -26,9 +26,15 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   int _currentValue = 120;
+  int _defaultValue = 120;
 
   void changeTempo(value) {
     _currentValue = value;
+    notifyListeners();
+  }
+
+  void resetTempo() {
+    _currentValue = _defaultValue;
     notifyListeners();
   }
 }
@@ -69,19 +75,24 @@ class TempoSelector extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     int currentValue = appState._currentValue;
 
-    return Column(
-      children: <Widget>[
-        const Text(
-          'Tempo:',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+    return SizedBox(
+      child: GestureDetector(
+        onDoubleTap: () => appState.resetTempo(),
+        child: Column(
+          children: <Widget>[
+            const Text(
+              'Tempo:',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            NumberPicker(
+              value: currentValue,
+              minValue: 20,
+              maxValue: 400,
+              onChanged: (value) => appState.changeTempo(value),
+            ),
+          ],
         ),
-        NumberPicker(
-          value: currentValue,
-          minValue: 20,
-          maxValue: 400,
-          onChanged: (value) => appState.changeTempo(value),
-        ),
-      ],
+      ),
     );
   }
 }
