@@ -25,16 +25,28 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  int _currentValue = 120;
   int _defaultValue = 120;
+  late int _currentTempo = _defaultValue;
+
+  // void storeTempo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('tempo', _currentTempo);
+  // }
+
+  // void loadTempo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   print("load shit");
+  //   _currentTempo = prefs.getInt('tempo') ?? 120;
+  // }
 
   void changeTempo(value) {
-    _currentValue = value;
+    _currentTempo = value;
+    // storeTempo();
     notifyListeners();
   }
 
   void resetTempo() {
-    _currentValue = _defaultValue;
+    _currentTempo = _defaultValue;
     notifyListeners();
   }
 }
@@ -61,7 +73,17 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ValuesTable(),
             SizedBox(height: 50),
-            TempoSelector()
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Expanded(
+                  child: TempoSelector(),
+                ),
+                Expanded(
+                  child: TapTempo(),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -73,7 +95,7 @@ class TempoSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    int currentValue = appState._currentValue;
+    int currentValue = appState._currentTempo;
 
     return SizedBox(
       child: GestureDetector(
@@ -130,7 +152,7 @@ class ValuesTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     var appState = context.watch<MyAppState>();
-    int currentValue = appState._currentValue;
+    int currentValue = appState._currentTempo;
 
     return Column(
       children: <Widget>[
@@ -367,5 +389,80 @@ class ValuesTable extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class TapTempo extends StatelessWidget {
+  var _precision = 5;
+  dynamic _bpm = 0;
+  var _taps = [];
+
+  void calcBPM() {
+    dynamic currentBpm = 0;
+    var ticks = [];
+
+    if (_taps.length >= 2) {
+      for (var i = 0; i < _taps.length; i++) {
+        if (i >= 1) {
+          // calc bpm between last two taps
+          ticks.add((60 / (_taps[i] ~/ 10 - _taps[i - 1] ~/ 10)) / 100);
+        }
+      }
+    }
+
+    if (_taps.length >= 24) {
+      _taps.removeAt(0);
+    }
+
+    if (ticks.length >= 2) {
+      currentBpm = getAverage(ticks, _precision);
+
+      _bpm = currentBpm;
+
+      showCurrentBPM();
+    }
+  }
+
+  dynamic getAverage(values, precision) {
+    var ticks = values;
+    num n = 0;
+
+    for (var i = ticks.length - 1; i >= 0; i--) {
+      n += ticks[i];
+      if (ticks.length - i >= precision) break;
+    }
+
+    return n / _precision;
+  }
+
+  int showCurrentBPM() {
+    var calculated = (_bpm * 10000).round();
+    if (calculated >= 20) {
+      return calculated;
+    } else {
+      return 20;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    return SizedBox(
+        height: 100,
+        width: 100,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: () {
+                _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
+                calcBPM();
+                appState.changeTempo(showCurrentBPM());
+              },
+              child: Text('Tap'),
+            ),
+          ],
+        ));
   }
 }
