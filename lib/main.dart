@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:reliable_interval_timer/reliable_interval_timer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,20 +31,20 @@ class MyAppState extends ChangeNotifier {
   int _defaultValue = 120;
   late int _currentTempo = _defaultValue;
 
-  // void storeTempo() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setInt('tempo', _currentTempo);
-  // }
+  void storeTempo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('tempo', _currentTempo);
+  }
 
-  // void loadTempo() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   print("load shit");
-  //   _currentTempo = prefs.getInt('tempo') ?? 120;
-  // }
+  void loadTempo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("load shit");
+    _currentTempo = prefs.getInt('tempo') ?? 120;
+  }
 
   void changeTempo(value) {
     _currentTempo = value;
-    // storeTempo();
+    storeTempo();
     notifyListeners();
   }
 
@@ -393,9 +396,9 @@ class ValuesTable extends StatelessWidget {
 }
 
 class TapTempo extends StatelessWidget {
-  var _precision = 5;
+  final _precision = 5;
   dynamic _bpm = 0;
-  var _taps = [];
+  final _taps = [];
 
   void calcBPM() {
     dynamic currentBpm = 0;
@@ -461,6 +464,99 @@ class TapTempo extends StatelessWidget {
                 appState.changeTempo(showCurrentBPM());
               },
               child: Text('Tap'),
+            ),
+            Metronome()
+          ],
+        ));
+  }
+}
+
+class Metronome extends StatefulWidget {
+  const Metronome({super.key});
+  static of(BuildContext context, {bool root = false}) => root
+      ? context.findRootAncestorStateOfType<MetronomeState>()
+      : context.findAncestorStateOfType<MetronomeState>();
+
+  @override
+  State<Metronome> createState() => MetronomeState();
+}
+
+class MetronomeState extends State<Metronome> {
+  double _tempo = 150;
+
+  final minute = 1000 * 60;
+  bool soundEnabled = true;
+  late ReliableIntervalTimer _timer;
+  static AudioPlayer player = AudioPlayer();
+
+  int _calculateTimerInterval(int tempo) {
+    double timerInterval = minute / tempo;
+
+    return timerInterval.round();
+  }
+
+  void onTimerTick(int elapsedMilliseconds) async {
+    if (soundEnabled) {
+      player.play(AssetSource('audio/metronome.wav'));
+    }
+  }
+
+  ReliableIntervalTimer _scheduleTimer([int milliseconds = 10000]) {
+    return ReliableIntervalTimer(
+      interval: Duration(milliseconds: milliseconds),
+      callback: onTimerTick,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _timer = _scheduleTimer(_calculateTimerInterval(_tempo.round()));
+
+    _timer.start();
+  }
+
+  @override
+  void dispose() {
+    _timer.stop();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+    IconData playIcon = Icons.play_arrow;
+    IconData stopIcon = Icons.stop;
+
+    return SizedBox(
+        height: 100,
+        width: 100,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                TextButton.icon(
+                  onPressed: () async {
+                    _timer = _scheduleTimer(
+                      _calculateTimerInterval(_tempo.round()),
+                    );
+
+                    await _timer.start();
+                  },
+                  icon: Icon(playIcon),
+                  label: Text('Play'),
+                ),
+                TextButton.icon(
+                  onPressed: () async {
+                    await _timer.stop();
+                  },
+                  icon: Icon(stopIcon),
+                  label: Text('Stop'),
+                )
+              ],
             ),
           ],
         ));
