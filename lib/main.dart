@@ -78,13 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(height: 50),
             Row(
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Expanded(
-                  child: TempoSelector(),
-                ),
-                Expanded(
-                  child: TapTempo(),
-                ),
+              children: [
+                SizedBox(width: 100),
+                TempoSelector(),
+                TapTempo(),
               ],
             )
           ],
@@ -465,7 +462,7 @@ class TapTempo extends StatelessWidget {
               },
               child: Text('Tap'),
             ),
-            Metronome()
+            // Metronome()
           ],
         ));
   }
