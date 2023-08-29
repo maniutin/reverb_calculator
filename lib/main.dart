@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Reverb & Delay Calculator',
           theme: ThemeData(
-              primarySwatch: Colors.blueGrey,
+              primaryColor: Color.fromRGBO(255, 175, 204, 1),
               scaffoldBackgroundColor: Colors.grey),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
@@ -74,13 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ValuesTable(),
             SizedBox(height: 50),
+            ValuesTable(),
+            SizedBox(height: 75),
             Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Metronome(),
-                // SizedBox(width: 100),
                 TempoSelector(),
                 TapTempo(),
               ],
@@ -452,18 +453,20 @@ class TapTempo extends StatelessWidget {
     return SizedBox(
         height: 100,
         width: 100,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(
-              onPressed: () {
-                _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
-                calcBPM();
-                appState.changeTempo(showCurrentBPM());
-              },
-              child: Text('Tap'),
-            ),
-          ],
+        child: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextButton(
+                onPressed: () {
+                  _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
+                  calcBPM();
+                  appState.changeTempo(showCurrentBPM());
+                },
+                child: Text('Tap'),
+              ),
+            ],
+          ),
         ));
   }
 }
