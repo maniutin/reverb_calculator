@@ -170,19 +170,26 @@ class ValuesTable extends StatelessWidget {
             child: Scaffold(
               appBar: TabBar(
                 tabs: [
-                  Text(
-                    'Reverb',
-                    style: TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Reverb',
+                      style: TextStyle(
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
-                  Text(
-                    'Delay',
-                    style: TextStyle(
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Delay',
+                      style: TextStyle(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
                   ),
                 ],
               ),
