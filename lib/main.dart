@@ -20,8 +20,11 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Reverb & Delay Calculator',
           theme: ThemeData(
-              primaryColor: Color.fromRGBO(255, 175, 204, 1),
-              scaffoldBackgroundColor: Colors.grey),
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                primary: const Color.fromARGB(255, 156, 137, 184),
+                secondary: Color.fromARGB(255, 156, 137, 184),
+              ),
+              scaffoldBackgroundColor: Color.fromARGB(255, 223, 202, 221)),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
   }
@@ -81,7 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Metronome(),
+                // Metronome(),
+                SizedBox(width: 100),
                 TempoSelector(),
                 TapTempo(),
               ],
