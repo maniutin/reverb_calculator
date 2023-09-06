@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:reliable_interval_timer/reliable_interval_timer.dart';
+import 'package:metronome/metronome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,8 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Metronome(),
-                SizedBox(width: 100),
+                MetronomeWidget(),
+                // SizedBox(width: 100),
                 TempoSelector(),
                 TapTempo(),
               ],
@@ -484,6 +483,56 @@ class TapTempo extends StatelessWidget {
               ),
             ],
           ),
+        ));
+  }
+}
+
+class MetronomeWidget extends StatefulWidget {
+  const MetronomeWidget({super.key});
+
+  @override
+  State<MetronomeWidget> createState() => MetronomeWidgetState();
+}
+
+class MetronomeWidgetState extends State<MetronomeWidget> {
+  final _metronomePlugin = Metronome();
+
+  @override
+  void initState() {
+    super.initState();
+    _metronomePlugin.setAudioFile('assets/audio/metronome.wav');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    IconData playIcon = Icons.play_arrow;
+    IconData stopIcon = Icons.stop;
+
+    return SizedBox(
+        height: 100,
+        width: 100,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    _metronomePlugin.play(300);
+                  },
+                  icon: Icon(playIcon),
+                  label: Text('Play'),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    _metronomePlugin.stop();
+                  },
+                  icon: Icon(stopIcon),
+                  label: Text('Stop'),
+                )
+              ],
+            ),
+          ],
         ));
   }
 }
