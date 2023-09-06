@@ -196,204 +196,210 @@ class ValuesTable extends StatelessWidget {
               body: TabBarView(
                 children: [
                   // Reverb Table
-                  DataTable(
-                    columnSpacing: 25.0,
-                    columns: [
-                      DataColumn(
-                        label: Text('Size'),
-                      ),
-                      DataColumn(
-                        label: Text('Pre-Delay'),
-                      ),
-                      DataColumn(
-                        label: Text('Decay'),
-                      ),
-                      DataColumn(
-                        label: Text('Total'),
-                      ),
-                    ],
-                    rows: [
-                      // 1/16 Note
-                      DataRow(cells: [
-                        const DataCell(Text('1/16 Note')),
-                        DataCell(Text(calculateReverbTime(
-                            currentValue, 'predelay', 0.25))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 0.25))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 0.25))),
-                      ]),
-                      // 1/8 Note
-                      DataRow(cells: [
-                        DataCell(Text('1/8 Note')),
-                        DataCell(Text(calculateReverbTime(
-                            currentValue, 'predelay', 0.5))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 0.5))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 0.5))),
-                      ]),
-                      // 1/4 Note
-                      DataRow(cells: [
-                        DataCell(Text('1/4 Note')),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'predelay', 1))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 1))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 1))),
-                      ]),
-                      // 1/2 Note
-                      DataRow(cells: [
-                        DataCell(Text('1/2 Note')),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'predelay', 2))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 2))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 2))),
-                      ]),
-                      // 1 bar
-                      DataRow(cells: [
-                        DataCell(Text('1 Bar')),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'predelay', 4))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 4))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 4))),
-                      ]),
-                      // 2 bars
-                      DataRow(cells: [
-                        DataCell(Text('2 Bars')),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'predelay', 8))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 8))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 8))),
-                      ]),
-                      // 4 bars
-                      DataRow(cells: [
-                        DataCell(Text('4 Bars')),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'predelay', 16))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 16))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 16))),
-                      ]),
-                      // 8 bars
-                      DataRow(cells: [
-                        DataCell(Text('8 Bars')),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'predelay', 32))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'decay', 32))),
-                        DataCell(Text(
-                            calculateReverbTime(currentValue, 'total', 32))),
-                      ]),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: DataTable(
+                      columnSpacing: 25.0,
+                      columns: [
+                        DataColumn(
+                          label: Text('Size'),
+                        ),
+                        DataColumn(
+                          label: Text('Pre-Delay'),
+                        ),
+                        DataColumn(
+                          label: Text('Decay'),
+                        ),
+                        DataColumn(
+                          label: Text('Total'),
+                        ),
+                      ],
+                      rows: [
+                        // 1/16 Note
+                        DataRow(cells: [
+                          const DataCell(Text('1/16 Note')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 0.25))),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'decay', 0.25))),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'total', 0.25))),
+                        ]),
+                        // 1/8 Note
+                        DataRow(cells: [
+                          DataCell(Text('1/8 Note')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 0.5))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 0.5))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 0.5))),
+                        ]),
+                        // 1/4 Note
+                        DataRow(cells: [
+                          DataCell(Text('1/4 Note')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 1))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 1))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 1))),
+                        ]),
+                        // 1/2 Note
+                        DataRow(cells: [
+                          DataCell(Text('1/2 Note')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 2))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 2))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 2))),
+                        ]),
+                        // 1 bar
+                        DataRow(cells: [
+                          DataCell(Text('1 Bar')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 4))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 4))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 4))),
+                        ]),
+                        // 2 bars
+                        DataRow(cells: [
+                          DataCell(Text('2 Bars')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 8))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 8))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 8))),
+                        ]),
+                        // 4 bars
+                        DataRow(cells: [
+                          DataCell(Text('4 Bars')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 16))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 16))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 16))),
+                        ]),
+                        // 8 bars
+                        DataRow(cells: [
+                          DataCell(Text('8 Bars')),
+                          DataCell(Text(calculateReverbTime(
+                              currentValue, 'predelay', 32))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'decay', 32))),
+                          DataCell(Text(
+                              calculateReverbTime(currentValue, 'total', 32))),
+                        ]),
+                      ],
+                    ),
                   ),
                   // Delay Table
-                  DataTable(
-                    columnSpacing: 30.0,
-                    columns: [
-                      DataColumn(
-                        label: Text('Size'),
-                      ),
-                      DataColumn(
-                        label: Text('Note'),
-                      ),
-                      DataColumn(
-                        label: Text('Dotted'),
-                      ),
-                      DataColumn(
-                        label: Text('Tiplet'),
-                      ),
-                    ],
-                    rows: [
-                      // 1/16 Note
-                      DataRow(cells: [
-                        const DataCell(Text('1/16 Note')),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'note', 0.25))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 0.25))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 0.25))),
-                      ]),
-                      // 1/8 Note
-                      DataRow(cells: [
-                        DataCell(Text('1/8 Note')),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'note', 0.5))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 0.5))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 0.5))),
-                      ]),
-                      // 1/4 Note
-                      DataRow(cells: [
-                        DataCell(Text('1/4 Note')),
-                        DataCell(
-                            Text(calculateDelayTime(currentValue, 'note', 1))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 1))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 1))),
-                      ]),
-                      // 1/2 Note
-                      DataRow(cells: [
-                        DataCell(Text('1/2 Note')),
-                        DataCell(
-                            Text(calculateDelayTime(currentValue, 'note', 2))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 2))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 2))),
-                      ]),
-                      // 1 bar
-                      DataRow(cells: [
-                        DataCell(Text('1 Bar')),
-                        DataCell(
-                            Text(calculateDelayTime(currentValue, 'note', 4))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 4))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 4))),
-                      ]),
-                      // 2 bars
-                      DataRow(cells: [
-                        DataCell(Text('2 Bars')),
-                        DataCell(
-                            Text(calculateDelayTime(currentValue, 'note', 8))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 8))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 8))),
-                      ]),
-                      // 4 bars
-                      DataRow(cells: [
-                        DataCell(Text('4 Bars')),
-                        DataCell(
-                            Text(calculateDelayTime(currentValue, 'note', 16))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 16))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 16))),
-                      ]),
-                      // 8 bars
-                      DataRow(cells: [
-                        DataCell(Text('8 Bars')),
-                        DataCell(
-                            Text(calculateDelayTime(currentValue, 'note', 32))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'dotted', 32))),
-                        DataCell(Text(
-                            calculateDelayTime(currentValue, 'triplet', 32))),
-                      ]),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: DataTable(
+                      columnSpacing: 30.0,
+                      columns: [
+                        DataColumn(
+                          label: Text('Size'),
+                        ),
+                        DataColumn(
+                          label: Text('Note'),
+                        ),
+                        DataColumn(
+                          label: Text('Dotted'),
+                        ),
+                        DataColumn(
+                          label: Text('Tiplet'),
+                        ),
+                      ],
+                      rows: [
+                        // 1/16 Note
+                        DataRow(cells: [
+                          const DataCell(Text('1/16 Note')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 0.25))),
+                          DataCell(Text(calculateDelayTime(
+                              currentValue, 'dotted', 0.25))),
+                          DataCell(Text(calculateDelayTime(
+                              currentValue, 'triplet', 0.25))),
+                        ]),
+                        // 1/8 Note
+                        DataRow(cells: [
+                          DataCell(Text('1/8 Note')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 0.5))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 0.5))),
+                          DataCell(Text(calculateDelayTime(
+                              currentValue, 'triplet', 0.5))),
+                        ]),
+                        // 1/4 Note
+                        DataRow(cells: [
+                          DataCell(Text('1/4 Note')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 1))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 1))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'triplet', 1))),
+                        ]),
+                        // 1/2 Note
+                        DataRow(cells: [
+                          DataCell(Text('1/2 Note')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 2))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 2))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'triplet', 2))),
+                        ]),
+                        // 1 bar
+                        DataRow(cells: [
+                          DataCell(Text('1 Bar')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 4))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 4))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'triplet', 4))),
+                        ]),
+                        // 2 bars
+                        DataRow(cells: [
+                          DataCell(Text('2 Bars')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 8))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 8))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'triplet', 8))),
+                        ]),
+                        // 4 bars
+                        DataRow(cells: [
+                          DataCell(Text('4 Bars')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 16))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 16))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'triplet', 16))),
+                        ]),
+                        // 8 bars
+                        DataRow(cells: [
+                          DataCell(Text('8 Bars')),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'note', 32))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'dotted', 32))),
+                          DataCell(Text(
+                              calculateDelayTime(currentValue, 'triplet', 32))),
+                        ]),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -478,98 +484,6 @@ class TapTempo extends StatelessWidget {
               ),
             ],
           ),
-        ));
-  }
-}
-
-class Metronome extends StatefulWidget {
-  const Metronome({super.key});
-  static of(BuildContext context, {bool root = false}) => root
-      ? context.findRootAncestorStateOfType<MetronomeState>()
-      : context.findAncestorStateOfType<MetronomeState>();
-
-  @override
-  State<Metronome> createState() => MetronomeState();
-}
-
-class MetronomeState extends State<Metronome> {
-  double _tempo = 150;
-
-  final minute = 1000 * 60;
-  bool soundEnabled = true;
-  late ReliableIntervalTimer _timer;
-  static AudioPlayer player = AudioPlayer();
-
-  int _calculateTimerInterval(int tempo) {
-    double timerInterval = minute / tempo;
-
-    return timerInterval.round();
-  }
-
-  void onTimerTick(int elapsedMilliseconds) async {
-    if (soundEnabled) {
-      player.play(AssetSource('audio/metronome.wav'));
-    }
-  }
-
-  ReliableIntervalTimer _scheduleTimer([int milliseconds = 10000]) {
-    return ReliableIntervalTimer(
-      interval: Duration(milliseconds: milliseconds),
-      callback: onTimerTick,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _timer = _scheduleTimer(_calculateTimerInterval(_tempo.round()));
-
-    _timer.start();
-  }
-
-  @override
-  void dispose() {
-    _timer.stop();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    IconData playIcon = Icons.play_arrow;
-    IconData stopIcon = Icons.stop;
-
-    return SizedBox(
-        height: 100,
-        width: 100,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              children: [
-                TextButton.icon(
-                  onPressed: () async {
-                    _timer = _scheduleTimer(
-                      _calculateTimerInterval(_tempo.round()),
-                    );
-
-                    await _timer.start();
-                  },
-                  icon: Icon(playIcon),
-                  label: Text('Play'),
-                ),
-                TextButton.icon(
-                  onPressed: () async {
-                    await _timer.stop();
-                  },
-                  icon: Icon(stopIcon),
-                  label: Text('Stop'),
-                )
-              ],
-            ),
-          ],
         ));
   }
 }
