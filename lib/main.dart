@@ -11,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -33,20 +32,21 @@ class MyAppState extends ChangeNotifier {
   int _defaultValue = 120;
   late int _currentTempo = _defaultValue;
 
-  void storeTempo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('tempo', _currentTempo);
-  }
+  // for use in Local Storage
+  // void storeTempo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('tempo', _currentTempo);
+  // }
 
-  void loadTempo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("load shit");
-    _currentTempo = prefs.getInt('tempo') ?? 120;
-  }
+  // void loadTempo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   print("load shit");
+  //   _currentTempo = prefs.getInt('tempo') ?? 120;
+  // }
 
   void changeTempo(value) {
     _currentTempo = value;
-    storeTempo();
+    // storeTempo();
     notifyListeners();
   }
 
@@ -69,9 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MetronomeWidget(),
-                // SizedBox(width: 100),
                 TempoSelector(),
                 TapTempo(),
               ],
@@ -505,8 +501,10 @@ class MetronomeWidgetState extends State<MetronomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
     IconData playIcon = Icons.play_arrow;
     IconData stopIcon = Icons.stop;
+    _metronomePlugin.setBPM(appState._currentTempo.toDouble());
 
     return SizedBox(
         height: 100,
@@ -518,7 +516,7 @@ class MetronomeWidgetState extends State<MetronomeWidget> {
               children: [
                 TextButton.icon(
                   onPressed: () {
-                    _metronomePlugin.play(300);
+                    _metronomePlugin.play(appState._currentTempo.toDouble());
                   },
                   icon: Icon(playIcon),
                   label: Text('Play'),
