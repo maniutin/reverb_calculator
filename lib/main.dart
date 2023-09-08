@@ -492,6 +492,21 @@ class MetronomeWidget extends StatefulWidget {
 
 class MetronomeWidgetState extends State<MetronomeWidget> {
   final _metronomePlugin = Metronome();
+  bool isMetroPlaying = false;
+
+  void _startPlayback(tempo) {
+    setState(() {
+      isMetroPlaying = true;
+    });
+    _metronomePlugin.play(tempo);
+  }
+
+  void _stopPlayback() {
+    setState(() {
+      isMetroPlaying = false;
+    });
+    _metronomePlugin.stop();
+  }
 
   @override
   void initState() {
@@ -516,18 +531,13 @@ class MetronomeWidgetState extends State<MetronomeWidget> {
               children: [
                 TextButton.icon(
                   onPressed: () {
-                    _metronomePlugin.play(appState._currentTempo.toDouble());
+                    isMetroPlaying
+                        ? _stopPlayback()
+                        : _startPlayback(appState._currentTempo.toDouble());
                   },
-                  icon: Icon(playIcon),
-                  label: Text('Play'),
+                  icon: Icon(isMetroPlaying ? stopIcon : playIcon),
+                  label: Text(isMetroPlaying ? 'Stop' : 'Play'),
                 ),
-                TextButton.icon(
-                  onPressed: () {
-                    _metronomePlugin.stop();
-                  },
-                  icon: Icon(stopIcon),
-                  label: Text('Stop'),
-                )
               ],
             ),
           ],
