@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metronome/metronome.dart';
 
 void main() {
@@ -104,7 +103,7 @@ class TempoSelector extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const Text(
-              'Tempo:',
+              'Tempo',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             NumberPicker(
@@ -470,6 +469,10 @@ class TapTempo extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextButton(
+                style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(24),
+                    backgroundColor: Color(0x17000000)),
                 onPressed: () {
                   _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
                   calcBPM();
@@ -529,6 +532,11 @@ class MetronomeWidgetState extends State<MetronomeWidget> {
           children: [
             Column(
               children: [
+                const Text(
+                  'Metronome',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                SizedBox(height: 10),
                 TextButton.icon(
                   onPressed: () {
                     isMetroPlaying
