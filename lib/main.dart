@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
                 primary: const Color.fromARGB(255, 29, 53, 87),
                 secondary: Color.fromARGB(255, 230, 57, 70),
               ),
-              scaffoldBackgroundColor: Color.fromARGB(255, 168, 218, 220)),
+              scaffoldBackgroundColor: Color.fromARGB(255, 177, 214, 216)),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
   }
@@ -171,13 +171,13 @@ class ValuesTable extends StatelessWidget {
                           label: Text('Size'),
                         ),
                         DataColumn(
-                          label: Text('Pre-Delay'),
+                          label: Text('Pre-Delay,\nms'),
                         ),
                         DataColumn(
-                          label: Text('Decay'),
+                          label: Text('Decay\nms'),
                         ),
                         DataColumn(
-                          label: Text('Total'),
+                          label: Text('Total\nms'),
                         ),
                       ],
                       rows: [
@@ -274,13 +274,13 @@ class ValuesTable extends StatelessWidget {
                           label: Text('Size'),
                         ),
                         DataColumn(
-                          label: Text('Note'),
+                          label: Text('Note\nms'),
                         ),
                         DataColumn(
-                          label: Text('Dotted'),
+                          label: Text('Dotted\nms'),
                         ),
                         DataColumn(
-                          label: Text('Tiplet'),
+                          label: Text('Tiplet\nms'),
                         ),
                       ],
                       rows: [
