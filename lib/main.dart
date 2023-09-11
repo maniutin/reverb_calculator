@@ -544,28 +544,35 @@ class TapTempo extends StatelessWidget {
     return SizedBox(
         height: 100,
         width: 100,
-        child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextButton(
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  padding: EdgeInsets.all(24),
-                  backgroundColor: Color(0x17000000),
-                ),
-                onPressed: () {
-                  _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
-                  calcBPM();
-                  appState.changeTempo(showCurrentBPM());
-                },
-                child: Text(
-                  'Tap',
-                  style: TextStyle(color: theme.colorScheme.secondary),
-                ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(24),
+                      backgroundColor: Color(0x17000000),
+                    ),
+                    onPressed: () {
+                      _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
+                      calcBPM();
+                      appState.changeTempo(showCurrentBPM());
+                    },
+                    child: Text(
+                      'Tap',
+                      style: TextStyle(color: theme.colorScheme.secondary),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 }
