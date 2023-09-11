@@ -63,7 +63,16 @@ flutter:
   uses-material-design: true
   assets:
     - assets/audio/
-
+    - assets/images/SVG/
+  fonts:
+    - family: LarishNeue
+      fonts:
+        - asset: assets/fonts/LarishNeueSemiboldRegular.otf
+    - family: NimbusSans
+      fonts:
+        - asset: assets/fonts/NimbusSanL-Reg.otf
+        - asset: fonts/NimbusSanL-Bol.otf
+          weight: 700
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

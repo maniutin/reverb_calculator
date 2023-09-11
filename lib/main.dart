@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
                 primary: const Color.fromARGB(255, 29, 53, 87),
                 secondary: Color.fromARGB(255, 230, 57, 70),
               ),
-              scaffoldBackgroundColor: Color.fromARGB(255, 177, 214, 216)),
+              scaffoldBackgroundColor: Color.fromARGB(255, 177, 214, 216),
+              fontFamily: 'NimbusSans',
+              dividerColor: Colors.transparent),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
   }
@@ -68,24 +70,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 50),
-            ValuesTable(),
-            SizedBox(height: 75),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MetronomeWidget(),
-                TempoSelector(),
-                TapTempo(),
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 50),
+                ValuesTable(),
+                SizedBox(height: 75),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MetronomeWidget(),
+                    TempoSelector(),
+                    TapTempo(),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -141,10 +147,10 @@ class ValuesTable extends StatelessWidget {
                     child: Text(
                       'Reverb',
                       style: TextStyle(
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'LarishNeue'),
                     ),
                   ),
                   Padding(
@@ -154,7 +160,8 @@ class ValuesTable extends StatelessWidget {
                       style: TextStyle(
                           color: theme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                          fontSize: 20,
+                          fontFamily: 'LarishNeue'),
                     ),
                   ),
                 ],
@@ -168,24 +175,54 @@ class ValuesTable extends StatelessWidget {
                       columnSpacing: 25.0,
                       columns: [
                         DataColumn(
-                          label: Text('Size'),
+                          numeric: true,
+                          label: Text(
+                            'Size',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: theme.colorScheme.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                         DataColumn(
-                          label: Text('Pre-Delay,\nms'),
+                          numeric: true,
+                          label: Text('Pre-Delay\nms',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                         DataColumn(
-                          label: Text('Decay\nms'),
+                          numeric: true,
+                          label: Text('Decay\nms',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                         DataColumn(
-                          label: Text('Total\nms'),
+                          numeric: true,
+                          label: Text('Total\nms',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                       ],
                       rows: [
                         // 1/16 Note
                         DataRow(cells: [
                           const DataCell(Text('1/16 Note')),
-                          DataCell(Text(calculateReverbTime(
-                              currentValue, 'predelay', 0.25))),
+                          DataCell(
+                            Text(
+                              calculateReverbTime(
+                                  currentValue, 'predelay', 0.25),
+                            ),
+                          ),
                           DataCell(Text(calculateReverbTime(
                               currentValue, 'decay', 0.25))),
                           DataCell(Text(calculateReverbTime(
@@ -271,16 +308,40 @@ class ValuesTable extends StatelessWidget {
                       columnSpacing: 30.0,
                       columns: [
                         DataColumn(
-                          label: Text('Size'),
+                          numeric: true,
+                          label: Text('Size',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                         DataColumn(
-                          label: Text('Note\nms'),
+                          numeric: true,
+                          label: Text('Note\nms',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                         DataColumn(
-                          label: Text('Dotted\nms'),
+                          numeric: true,
+                          label: Text('Dotted\nms',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                         DataColumn(
-                          label: Text('Tiplet\nms'),
+                          numeric: true,
+                          label: Text('Triplet\nms',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ),
                       ],
                       rows: [
@@ -429,7 +490,8 @@ class MetronomeWidgetState extends State<MetronomeWidget> {
                   style: TextStyle(
                       color: theme.colorScheme.primary,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                      fontSize: 16,
+                      fontFamily: 'LarishNeue'),
                 ),
                 SizedBox(height: 10),
                 TextButton(
@@ -469,7 +531,8 @@ class TempoSelector extends StatelessWidget {
               style: TextStyle(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 24,
+                  fontFamily: 'LarishNeue'),
             ),
             NumberPicker(
               value: currentValue,
