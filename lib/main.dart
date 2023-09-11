@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
           title: 'Reverb & Delay Calculator',
           theme: ThemeData(
               colorScheme: ColorScheme.fromSwatch().copyWith(
-                primary: const Color.fromARGB(255, 156, 137, 184),
-                secondary: Color.fromARGB(255, 156, 137, 184),
+                primary: const Color.fromARGB(255, 29, 53, 87),
+                secondary: Color.fromARGB(255, 230, 57, 70),
               ),
-              scaffoldBackgroundColor: Color.fromARGB(255, 223, 202, 221)),
+              scaffoldBackgroundColor: Color.fromARGB(255, 168, 218, 220)),
           home: MyHomePage(title: 'Reverb & Delay Calculator'),
         ));
   }
@@ -84,34 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 TapTempo(),
               ],
             )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TempoSelector extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    int currentValue = appState._currentTempo;
-
-    return SizedBox(
-      child: GestureDetector(
-        onDoubleTap: () => appState.resetTempo(),
-        child: Column(
-          children: <Widget>[
-            const Text(
-              'Tempo',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            NumberPicker(
-              value: currentValue,
-              minValue: 20,
-              maxValue: 400,
-              onChanged: (value) => appState.changeTempo(value),
-            ),
           ],
         ),
       ),
@@ -405,6 +377,113 @@ class ValuesTable extends StatelessWidget {
   }
 }
 
+class MetronomeWidget extends StatefulWidget {
+  const MetronomeWidget({super.key});
+
+  @override
+  State<MetronomeWidget> createState() => MetronomeWidgetState();
+}
+
+class MetronomeWidgetState extends State<MetronomeWidget> {
+  final _metronomePlugin = Metronome();
+  bool isMetroPlaying = false;
+
+  void _startPlayback(tempo) {
+    setState(() {
+      isMetroPlaying = true;
+    });
+    _metronomePlugin.play(tempo);
+  }
+
+  void _stopPlayback() {
+    setState(() {
+      isMetroPlaying = false;
+    });
+    _metronomePlugin.stop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _metronomePlugin.setAudioFile('assets/audio/metronome.wav');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    var appState = context.watch<MyAppState>();
+    IconData playIcon = Icons.play_arrow;
+    IconData stopIcon = Icons.stop;
+    _metronomePlugin.setBPM(appState._currentTempo.toDouble());
+
+    return SizedBox(
+        height: 100,
+        width: 100,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              children: [
+                Text(
+                  'Metronome',
+                  style: TextStyle(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+                SizedBox(height: 10),
+                TextButton(
+                  onPressed: () {
+                    isMetroPlaying
+                        ? _stopPlayback()
+                        : _startPlayback(appState._currentTempo.toDouble());
+                  },
+                  child: Icon(
+                    isMetroPlaying ? stopIcon : playIcon,
+                    color: theme.colorScheme.secondary,
+                    size: 36,
+                  ),
+                  // label: Text(isMetroPlaying ? 'Stop' : 'Play'),
+                ),
+              ],
+            ),
+          ],
+        ));
+  }
+}
+
+class TempoSelector extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    var appState = context.watch<MyAppState>();
+    int currentValue = appState._currentTempo;
+
+    return SizedBox(
+      child: GestureDetector(
+        onDoubleTap: () => appState.resetTempo(),
+        child: Column(
+          children: <Widget>[
+            Text(
+              'Tempo',
+              style: TextStyle(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+            NumberPicker(
+              value: currentValue,
+              minValue: 20,
+              maxValue: 400,
+              onChanged: (value) => appState.changeTempo(value),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class TapTempo extends StatelessWidget {
   final _precision = 5;
   dynamic _bpm = 0;
@@ -459,6 +538,7 @@ class TapTempo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     var appState = context.watch<MyAppState>();
 
     return SizedBox(
@@ -470,85 +550,22 @@ class TapTempo extends StatelessWidget {
             children: [
               TextButton(
                 style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(24),
-                    backgroundColor: Color(0x17000000)),
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(24),
+                  backgroundColor: Color(0x17000000),
+                ),
                 onPressed: () {
                   _taps.add(DateTime.now().toUtc().millisecondsSinceEpoch);
                   calcBPM();
                   appState.changeTempo(showCurrentBPM());
                 },
-                child: Text('Tap'),
+                child: Text(
+                  'Tap',
+                  style: TextStyle(color: theme.colorScheme.secondary),
+                ),
               ),
             ],
           ),
-        ));
-  }
-}
-
-class MetronomeWidget extends StatefulWidget {
-  const MetronomeWidget({super.key});
-
-  @override
-  State<MetronomeWidget> createState() => MetronomeWidgetState();
-}
-
-class MetronomeWidgetState extends State<MetronomeWidget> {
-  final _metronomePlugin = Metronome();
-  bool isMetroPlaying = false;
-
-  void _startPlayback(tempo) {
-    setState(() {
-      isMetroPlaying = true;
-    });
-    _metronomePlugin.play(tempo);
-  }
-
-  void _stopPlayback() {
-    setState(() {
-      isMetroPlaying = false;
-    });
-    _metronomePlugin.stop();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _metronomePlugin.setAudioFile('assets/audio/metronome.wav');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    IconData playIcon = Icons.play_arrow;
-    IconData stopIcon = Icons.stop;
-    _metronomePlugin.setBPM(appState._currentTempo.toDouble());
-
-    return SizedBox(
-        height: 100,
-        width: 100,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              children: [
-                const Text(
-                  'Metronome',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                SizedBox(height: 10),
-                TextButton.icon(
-                  onPressed: () {
-                    isMetroPlaying
-                        ? _stopPlayback()
-                        : _startPlayback(appState._currentTempo.toDouble());
-                  },
-                  icon: Icon(isMetroPlaying ? stopIcon : playIcon),
-                  label: Text(isMetroPlaying ? 'Stop' : 'Play'),
-                ),
-              ],
-            ),
-          ],
         ));
   }
 }
