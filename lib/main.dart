@@ -18,6 +18,11 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Reverb & Delay Calculator',
           theme: ThemeData(
+              textTheme: TextTheme(
+                bodyMedium: TextStyle(),
+              ).apply(
+                bodyColor: Color.fromARGB(255, 29, 53, 87),
+              ),
               colorScheme: ColorScheme.fromSwatch().copyWith(
                 primary: const Color.fromARGB(255, 29, 53, 87),
                 secondary: Color.fromARGB(255, 230, 57, 70),
