@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/SVG/background-1.png"),
+                image: AssetImage("assets/images/background-1.png"),
                 fit: BoxFit.cover),
           ),
           child: Column(
@@ -192,9 +192,9 @@ class ValuesTable extends StatelessWidget {
                               'Size\n',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                color: theme.colorScheme.primary,
-                                fontWeight: FontWeight.w700,
-                              ),
+                                  color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15),
                             ),
                           ),
                           DataColumn(
@@ -202,27 +202,27 @@ class ValuesTable extends StatelessWidget {
                             label: Text('Pre-Delay\nms',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                           DataColumn(
                             numeric: true,
                             label: Text('Decay\nms',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                           DataColumn(
                             numeric: true,
                             label: Text('Total\nms',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                         ],
                         rows: [
@@ -327,36 +327,36 @@ class ValuesTable extends StatelessWidget {
                             label: Text('Size\n',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                           DataColumn(
                             numeric: true,
                             label: Text('Note\nms',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                           DataColumn(
                             numeric: true,
                             label: Text('Dotted\nms',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                           DataColumn(
                             numeric: true,
                             label: Text('Triplet\nms',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15)),
                           ),
                         ],
                         rows: [
@@ -509,7 +509,7 @@ class MetronomeWidgetState extends State<MetronomeWidget> {
                       fontSize: 16,
                       fontFamily: 'LarishNeue'),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 17),
                 TextButton(
                   onPressed: () {
                     isMetroPlaying
@@ -626,7 +626,7 @@ class TapTempo extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 20,
+              height: 25,
             ),
             Center(
               child: Row(
@@ -646,7 +646,7 @@ class TapTempo extends StatelessWidget {
                     child: Text(
                       'Tap',
                       style: TextStyle(
-                          color: theme.colorScheme.secondary,
+                          color: theme.colorScheme.primary,
                           fontWeight: FontWeight.w700),
                     ),
                   ),

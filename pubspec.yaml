@@ -64,7 +64,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/audio/
-    - assets/images/SVG/
+    - assets/images/
   fonts:
     - family: LarishNeue
       fonts:
