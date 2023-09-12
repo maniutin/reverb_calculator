@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^2.2.0
   reliable_interval_timer: ^1.0.2
   metronome: ^0.0.1
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -71,7 +72,7 @@ flutter:
     - family: NimbusSans
       fonts:
         - asset: assets/fonts/NimbusSanL-Reg.otf
-        - asset: fonts/NimbusSanL-Bol.otf
+        - asset: assets/fonts/NimbusSanL-Bol.otf
           weight: 700
   # To add assets to your application, add an assets section, like this:
   # assets:
