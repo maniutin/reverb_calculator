@@ -3,6 +3,7 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import 'package:metronome/metronome.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,21 +40,22 @@ class MyAppState extends ChangeNotifier {
   int _defaultValue = 120;
   late int _currentTempo = _defaultValue;
 
-  // for use in Local Storage
-  // void storeTempo() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setInt('tempo', _currentTempo);
-  // }
+  void storeTempo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('tempo', _currentTempo);
+  }
 
-  // void loadTempo() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   print("load shit");
-  //   _currentTempo = prefs.getInt('tempo') ?? 120;
-  // }
+  void loadTempo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _currentTempo = prefs.getInt('tempo') as int;
+    notifyListeners();
+    print('load shite');
+    print(prefs.getInt('tempo'));
+  }
 
   void changeTempo(value) {
     _currentTempo = value;
-    // storeTempo();
+    storeTempo();
     notifyListeners();
   }
 
@@ -73,6 +75,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final MyAppState appState = MyAppState();
+  @override
+  void initState() {
+    super.initState();
+    appState.loadTempo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
