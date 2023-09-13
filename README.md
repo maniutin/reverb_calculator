@@ -1,16 +1,29 @@
-# reverb_calculator
+# Reverb and Delay Calculator
 
-A new Flutter project.
+Simple and elegant modern app for calculating reverb and delay time.
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+The application is designed for musicians and mixing engineers to help calculate reverb and delay time according to the tempo.
+Syncing reverb and delay time to the tempo of the song is essential to achieve professional grade results.
+Yet, a large percentage of vintage delay units, most of guitar pedals as well as the majority of reverb units both old and new provide no ability to sync the tail to the tempo.
+This is where Reverb and Delay calculator comes in handy.
 
-A few resources to get you started if this is your first Flutter project:
+## Functionality
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Calculate reverb and delay time in miliseconds and displays them in a table of note lengths ranging from 1/16 to 8 bars in 4/4 time.
+- Use handy metronome if working without a master clock (e.g. live band)
+- Use tap tempo to determine the tempo of the track if the actual value is unknown
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+
+## Stack
+
+The app is built in Flutter.
+Additional packages used are [Number Picker](https://pub.dev/packages/numberpicker) and [Metronome](https://pub.dev/packages/metronome).
+
+## Upcoming features
+
+- storing last used tempo in local storage to preserve it in-between sessions
+- customize the color scheme to make the app truly your own
+- add preview to check the desired effect length without having to dial it into your own devices
