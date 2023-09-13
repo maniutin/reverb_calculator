@@ -17,6 +17,12 @@ This is where Reverb and Delay calculator comes in handy.
 
 ## Screenshots
 
+Reverb page:
+![Reverb page](https://raw.githubusercontent.com/maniutin/reverb_calculator/main/assets/screenshots/reverb_page.png "Reverb Page")
+
+Delay page:
+![Delay page](https://raw.githubusercontent.com/maniutin/reverb_calculator/main/assets/screenshots/delay_page.png "Delay Page")
+
 ## Stack
 
 The app is built in Flutter.
