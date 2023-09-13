@@ -29,7 +29,10 @@ This is where Reverb and Delay calculator comes in handy.
 ## Stack
 
 The app is built in Flutter.
-Additional packages used are [Number Picker](https://pub.dev/packages/numberpicker) and [Metronome](https://pub.dev/packages/metronome).
+Additional packages used:
+
+- [Number Picker](https://pub.dev/packages/numberpicker)
+- [Metronome](https://pub.dev/packages/metronome).
 
 ## Upcoming features
 
