@@ -32,7 +32,7 @@ The app is built in Flutter.
 Additional packages used:
 
 - [Number Picker](https://pub.dev/packages/numberpicker)
-- [Metronome](https://pub.dev/packages/metronome).
+- [Metronome](https://pub.dev/packages/metronome)
 
 ## Upcoming features
 
