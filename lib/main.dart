@@ -40,22 +40,19 @@ class MyAppState extends ChangeNotifier {
   int _defaultValue = 120;
   late int _currentTempo = _defaultValue;
 
-  void storeTempo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('tempo', _currentTempo);
-  }
+  // void storeTempo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('tempo', _currentTempo);
+  // }
 
-  void loadTempo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _currentTempo = prefs.getInt('tempo') as int;
-    notifyListeners();
-    print('load tempo');
-    print(prefs.getInt('tempo'));
-  }
+  // void loadTempo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.getInt('tempo');
+  // }
 
   void changeTempo(value) {
     _currentTempo = value;
-    storeTempo();
+    // storeTempo();
     notifyListeners();
   }
 
@@ -75,13 +72,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final MyAppState appState = MyAppState();
-  @override
-  void initState() {
-    super.initState();
-    appState.loadTempo();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
