@@ -49,7 +49,7 @@ class MyAppState extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _currentTempo = prefs.getInt('tempo') as int;
     notifyListeners();
-    print('load shite');
+    print('load tempo');
     print(prefs.getInt('tempo'));
   }
 
