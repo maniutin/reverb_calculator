@@ -22,6 +22,7 @@ This is where Reverb and Delay calculator comes in handy.
   <img src="https://raw.githubusercontent.com/maniutin/reverb_calculator/main/assets/screenshots/delay_page.png" width="400" alt="Delay Page">
 </div>
 
+Logo:
 <img src="https://raw.githubusercontent.com/maniutin/reverb_calculator/main/assets/logos/main-trimmed.png" width="400" alt="Logo">
 
 ## Stack
