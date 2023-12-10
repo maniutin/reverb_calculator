@@ -30,8 +30,6 @@ This is where Reverb and Delay calculator comes in handy.
 
 <img src="https://github.com/maniutin/reverb_calculator/blob/main/assets/screenshots/reverb_calculator.gif" width="400" alt="Demo Gif">
 
-![Demo Gif](https://github.com/maniutin/reverb_calculator/blob/main/assets/screenshots/reverb_calculator.gif)
-
 <p><strong>Video Demo:</strong></p>
 
 [YouTube](https://youtube.com/shorts/TtVuXrpkKH0?feature=share)
