@@ -28,15 +28,21 @@ This is where Reverb and Delay calculator comes in handy.
 
 <p><strong>Video Demo:</strong></p>
 
-[YouTube](https://youtube.com/shorts/TtVuXrpkKH0?feature=share)
+<a href="https://youtube.com/shorts/TtVuXrpkKH0?feature=share" target="_blank">YouTube</a>
 
 ## Stack
 
 The app is built in Flutter.
 Additional packages used:
 
-- [Number Picker](https://pub.dev/packages/numberpicker)
-- [Metronome](https://pub.dev/packages/metronome)
+<ul>
+  <li>
+    <a href="https://pub.dev/packages/numberpicker" target="_blank">Number Picker</a>
+  </li>
+  <li>
+    <a href="https://pub.dev/packages/metronome" target="_blank">Metronome</a>
+  </li>
+</ul>
 
 ## Upcoming features
 
